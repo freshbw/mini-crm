@@ -27,4 +27,6 @@ repos:
       - id: mypy
         args: ["--config-file=backend/pyproject.toml"]
         pass_filenames: false
-        # иначе mypy видит только изменённые файлы и врёт на импортах
+        additional_dependencies:
+          - pydantic
+          - pydantic-settings

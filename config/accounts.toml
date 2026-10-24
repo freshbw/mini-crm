@@ -1,0 +1,16 @@
+[telegram]
+# Store the secret in the secrets/ directory as "telegram_bot_token".
+bot_token = { secret = "telegram_bot_token" }
+
+[email]
+imap_host = "imap.example.com"
+imap_port = 993
+imap_user = "me@example.com"
+# Store the secret in the secrets/ directory as "mail_imap_password".
+imap_password = { secret = "mail_imap_password" }
+
+smtp_host = "smtp.example.com"
+smtp_port = 587
+smtp_user = "me@example.com"
+# Store the secret in the secrets/ directory as "mail_smtp_password".
+smtp_password = { secret = "mail_smtp_password" }
