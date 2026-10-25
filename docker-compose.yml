@@ -15,12 +15,14 @@ services:
     restart: *default-restart
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-minicrm}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres__password
       POSTGRES_DB: ${POSTGRES_DB:-minicrm}
+    secrets:
+      - postgres__password
     volumes:
       - pgdata:/var/lib/postgresql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U minicrm -d minicrm"]
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -32,22 +34,26 @@ services:
     image: valkey/valkey:9-alpine
     restart: *default-restart
     command:
-      - valkey-server
-      - --appendonly
-      - "yes"
-      - --requirepass
-      - ${VALKEY_PASSWORD}
-    environment:
-      REDISCLI_AUTH: ${VALKEY_PASSWORD}
+      - sh
+      - -c
+      - exec valkey-server --appendonly yes --requirepass "$$(cat /run/secrets/valkey__password)"
+    secrets:
+      - valkey__password
     volumes:
       - valkeydata:/data
     healthcheck:
-      test: ["CMD", "valkey-cli", "ping"]
+      test: 'REDISCLI_AUTH="$$(cat /run/secrets/valkey__password)" valkey-cli ping | grep -q PONG'
       interval: 5s
       timeout: 3s
       retries: 10
     networks: [backend]
     logging: *default-logging
+
+secrets:
+  postgres__password:
+    file: ./secrets/postgres__password
+  valkey__password:
+    file: ./secrets/valkey__password
 
 networks:
   backend:
