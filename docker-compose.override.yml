@@ -1,0 +1,11 @@
+# Local only — auto-merged with docker-compose.yml
+# Do not use with production: docker compose -f docker-compose.yml -f compose.prod.yml ...
+
+services:
+  db:
+    ports:
+      - "5432:5432"
+
+  valkey:
+    ports:
+      - "6379:6379"
