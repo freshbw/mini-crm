@@ -68,6 +68,8 @@ class Settings(BaseSettings):
     email: EmailSettings
     telegram: TelegramSettings
 
+    debug: bool = False
+
     @classmethod
     def settings_customise_sources(
         cls,
