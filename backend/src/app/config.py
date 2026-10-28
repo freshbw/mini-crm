@@ -11,7 +11,7 @@ from pydantic_settings import (
     TomlConfigSettingsSource,
 )
 
-BASE_DIR = Path(__file__).resolve().parents[4]
+BASE_DIR = Path(__file__).resolve().parents[3]
 SECRETS_DIR = Path(os.getenv("SECRETS_DIR", BASE_DIR / "secrets"))
 TOML_FILE = BASE_DIR / "config" / "accounts.toml"
 
