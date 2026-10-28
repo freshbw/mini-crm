@@ -27,7 +27,7 @@ jobs:
           python-version-file: backend/.python-version
 
       - name: Install dependencies
-        run: uv sync --group dev
+        run: uv sync --all-groups
 
       - name: Ruff check
         run: uv run ruff check .
