@@ -39,4 +39,17 @@ jobs:
         run: uv run mypy
 
       - name: Pytest
+        env:
+          POSTGRES__PASSWORD: test
+          VALKEY__PASSWORD: test
+
+          EMAIL__SMTP__HOST: smtp.example.com
+          EMAIL__SMTP__USER: test@example.com
+          EMAIL__SMTP__PASSWORD: test
+
+          EMAIL__IMAP__HOST: imap.example.com
+          EMAIL__IMAP__USER: test@example.com
+          EMAIL__IMAP__PASSWORD: test
+
+          TELEGRAM__BOT_TOKEN: test
         run: uv run pytest
