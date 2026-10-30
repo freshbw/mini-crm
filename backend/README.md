@@ -1,5 +1,3 @@
-# Mini-CRM
+# Backend
 
-A CRM with a centralized messaging inbox. Read and reply to messages from different sources (Telegram and email for now) via a single interface.
-
-License: MIT
+See the [root README](../README.md) for project overview, setup, and development commands.
