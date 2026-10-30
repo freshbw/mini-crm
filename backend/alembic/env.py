@@ -17,7 +17,7 @@ settings = get_settings()
 pg = settings.postgres
 
 sync_url = URL.create(
-    drivername="postgresql+psycopg",  # sync; app использует asyncpg
+    drivername="postgresql+psycopg",  # sync; app uses asyncpg
     username=pg.user,
     password=pg.password.get_secret_value(),
     host=pg.host,
