@@ -34,11 +34,15 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 
 def create_app() -> FastAPI:
+    settings = get_settings()
     app = FastAPI(
         title="Mini-CRM API",
         version="0.0.1",
         description="Mini-CRM",
         lifespan=lifespan,
+        docs_url="/api/docs" if settings.debug else None,
+        openapi_url="/api/openapi.json" if settings.debug else None,
+        redoc_url="/api/redoc" if settings.debug else None,
     )
 
     app.include_router(api_router, prefix="/api")
